@@ -1,0 +1,18 @@
+Alexander Marshall, awm48
+10/29/2019
+EECS 349
+Homework 3 Part 1 Question 2
+
+For this question I will explain the algorithm for computing a new serial number based on any input name. I also included a python file in the Question 2 folder which can be run to give the same results.
+The algorithm consists of 3 steps:
+1) Compute the sum of all characters of the username. ASCII characters all have a corresponding int value.
+	1.1) XOR the total with 0x5678
+2) XOR the serial number with 0x1234
+3) Pop up the success dialog box if both results match.
+
+If I gave my name 'Alexander' the corresponding serial number is '18136'
+For the TA's names we get:
+Name = 'Shifu', Serial = 17715
+Name = 'Yiming', Serial = 17793
+Name = 'Yujie', Serial = 17866
+

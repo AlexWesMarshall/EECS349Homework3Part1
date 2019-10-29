@@ -1,0 +1,23 @@
+Alexander Marshall, awm48
+10/29/2019
+EECS 349, Computer Security
+Homework 3 Part 1 Question 1
+
+In this CRACKME there are a few ways to go about changing the code so a success message always appears.
+My steps in this process were to use OllyDbg to analyze the exe.
+First I 'Search for' >> 'All referenced text strings'. This returns a dialog box the program will refer to it. It contains every referenced string in the program
+Next we find the referenced string where it gives the pop-up 'No luck there, mate!'
+We can then jump to the memory location where this is actually kept.
+The memory location we go to first is 00401354 which leads to the dialog box when the correct serial number is given by the user. We will double click this memory location to find the details of the actual dialog box.
+On line 0040134D we right click >> 'Find references to' >> 'Selected command' which brings us to memory location 0040124C which is the call to our instructions for the dialog box.
+We view the instruction details of this line. Here it tells us that there is a jump command at line 00401243
+It says something like this:
+'00401241	CMP EAX,EBX
+00401243	JE SHORT CRACKME.0040124C'
+In these two lines we can short cut the program in one of two ways.
+First we change the compare. If we compare the EAX register to the EAX register it will all be equal to EAX so it will always jump
+'00401241	CMP EAX,EAX'
+Second thing we can do is change the 'JE' If we make the comparison 'JNE' = 'Jump if Not Equal' then unless given a correct serial number, we will always jump to the success dialog box.
+'00401243	JNE SHORT CRACKME.0040124C'
+I chose to change the compare since that will always result in the success dialog box showing up. 
+My changed CRACKME is located in the Question 1 folder labeled CRACKMECRACK.exe
